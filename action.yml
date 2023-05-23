@@ -1,0 +1,9 @@
+name: 'Quality Gate'
+description: 'Action to apply quality gate using static code check tools based on https://github.com/jenkinsci/analysis-model'
+inputs:
+  directory:
+    description: 'Directory'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
