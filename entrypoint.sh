@@ -1,3 +1,3 @@
 #!/bin/sh -l
 
-java -jar /target/quality-gate-0.0.1-SNAPSHOT.jar --directory $GITHUB_WORKSPACE
+java -cp '/target/quality-gate-0.0.1-SNAPSHOT.jar:/target/dependency/*' io.github.fwilhe2.Main --directory $GITHUB_WORKSPACE
