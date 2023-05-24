@@ -1,4 +1,4 @@
-package com.github.fwilhe2;
+package io.github.fwilhe2;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
