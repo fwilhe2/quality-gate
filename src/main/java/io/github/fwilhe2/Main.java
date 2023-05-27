@@ -9,6 +9,8 @@ import edu.hm.hafner.analysis.Severity;
 import edu.hm.hafner.analysis.parser.checkstyle.CheckStyleParser;
 import edu.hm.hafner.analysis.parser.findbugs.FindBugsParser;
 import edu.hm.hafner.analysis.parser.pmd.PmdParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,6 +40,8 @@ public class Main {
 
     @Parameter(names = {"--checkstyle-max-warnings-high"}, validateWith = PositiveInteger.class)
     Integer checkstyleMaximumAllowedWarningsHigh = 3;
+
+    Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
         Main main = new Main();
@@ -92,6 +96,8 @@ public class Main {
         if (!failureReasonsNonNull.isEmpty()) {
             throw new RuntimeException(String.join("\n", failureReasonsNonNull));
         }
+
+        logger.info("Quality Gate passed ✅");
     }
 
     Long countOccurrences(List<Report> reports, Severity severity) {
