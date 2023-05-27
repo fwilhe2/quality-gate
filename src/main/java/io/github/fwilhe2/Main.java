@@ -57,6 +57,7 @@ public class Main {
                 .walk(Paths.get(directory))
                 .filter(Files::isRegularFile)
                 .filter(path -> path.toString().contains("pmd.xml"))
+                .peek(System.out::println)
                 .map(path -> new PmdParser().parse(new FileReaderFactory(path))).toList();
         pmdReports.forEach(issues -> issues.forEach(System.out::println));
 
@@ -64,6 +65,7 @@ public class Main {
                 .walk(Paths.get(directory))
                 .filter(Files::isRegularFile)
                 .filter(path -> path.toString().contains("spotbugsXml.xml"))
+                .peek(System.out::println)
                 .map(path -> new FindBugsParser(FindBugsParser.PriorityProperty.RANK).parse(new FileReaderFactory(path))).toList();
         spotbugsReports.forEach(issues -> issues.forEach(System.out::println));
 
@@ -71,6 +73,7 @@ public class Main {
                 .walk(Paths.get(directory))
                 .filter(Files::isRegularFile)
                 .filter(path -> path.toString().contains("checkstyle-result.xml"))
+                .peek(System.out::println)
                 .map(path -> new CheckStyleParser().parse(new FileReaderFactory(path))).toList();
         checkstyleReports.forEach(issues -> issues.forEach(System.out::println));
 
@@ -97,7 +100,7 @@ public class Main {
             throw new RuntimeException(String.join("\n", failureReasonsNonNull));
         }
 
-        logger.info("Quality Gate passed ✅");
+        logger.info("Quality Gate passed");
     }
 
     Long countOccurrences(List<Report> reports, Severity severity) {
